@@ -1,26 +1,33 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import {SensorDataHandler} from "./SensorDataHandler";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+export const AccUUIDsContext = React.createContext();
+const ACC_UUIDS = {
+    serviceUUID: 'f000aa10-0451-4000-b000-000000000000',
+    dataCharUUID: 'f000aa11-0451-4000-b000-000000000000',
+    configCharUUID: 'f000aa12-0451-4000-b000-000000000000',
+};
+
+const App = () => {
+    const [accService, setAccService] = useState(undefined);
+
+    const getService = serviceUUID => navigator.bluetooth.requestDevice({filters: [{services: [serviceUUID]}]})
+        .then(device => device.gatt.connect())
+        .then(server => server.getPrimaryService(serviceUUID))
+        .then(service => {
+            setAccService(service);
+            return service;
+        })
+        .catch(err => console.log(err.message));
+
+    return (
+        <AccUUIDsContext.Provider value={ACC_UUIDS}>
+            <div>
+                <button onClick={() => getService(ACC_UUIDS.serviceUUID)}>Scan devices</button>
+            </div>
+            <SensorDataHandler service={accService}/>
+        </AccUUIDsContext.Provider>
+    );
+};
 
 export default App;
