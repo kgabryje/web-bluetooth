@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/web-bluetooth/static/css/main.34de6062.chunk.css",
-    "main.js": "/web-bluetooth/static/js/main.7d8b9230.chunk.js",
-    "main.js.map": "/web-bluetooth/static/js/main.7d8b9230.chunk.js.map",
+    "main.js": "/web-bluetooth/static/js/main.9caf4856.chunk.js",
+    "main.js.map": "/web-bluetooth/static/js/main.9caf4856.chunk.js.map",
     "runtime~main.js": "/web-bluetooth/static/js/runtime~main.cf309ef5.js",
     "runtime~main.js.map": "/web-bluetooth/static/js/runtime~main.cf309ef5.js.map",
     "static/js/2.0423afda.chunk.js": "/web-bluetooth/static/js/2.0423afda.chunk.js",
     "static/js/2.0423afda.chunk.js.map": "/web-bluetooth/static/js/2.0423afda.chunk.js.map",
     "index.html": "/web-bluetooth/index.html",
-    "precache-manifest.3a48c09f2793f4744cd1066ad9d57f24.js": "/web-bluetooth/precache-manifest.3a48c09f2793f4744cd1066ad9d57f24.js",
+    "precache-manifest.b8c07da4956bb4332effc56fc7b37407.js": "/web-bluetooth/precache-manifest.b8c07da4956bb4332effc56fc7b37407.js",
     "service-worker.js": "/web-bluetooth/service-worker.js",
     "static/css/main.34de6062.chunk.css.map": "/web-bluetooth/static/css/main.34de6062.chunk.css.map"
   }
