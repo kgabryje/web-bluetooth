@@ -14,9 +14,9 @@ export const SensorDataHandler = () => {
   const handleAccDataChange = useCallback(event => {
     const buffer = event.target.value;
     const output = [
-      buffer.getUint8(0),
-      buffer.getUint8(1),
-      buffer.getUint8(2)
+      buffer.getUint8(0), // axisX
+      buffer.getUint8(1), // axisY
+      buffer.getUint8(2) // axisZ
     ].map(calcAccFromSensorOutput);
 
     setValues(prevValues => {
