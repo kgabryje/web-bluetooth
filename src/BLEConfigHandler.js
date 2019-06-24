@@ -9,71 +9,74 @@ export const BLEConfigHandler = React.memo(
       setAccDataCharacteristic
     } = characteristicState;
 
-    const stopNotifications = () => {
+    const stopNotifications = async () => {
       const characteristic = accDataCharacteristic.characteristic;
-      if (accDataCharacteristic.characteristic) {
-        characteristic
-          .stopNotifications()
-          .then(() => {
-            characteristic.removeEventListener(
-              "characteristicvaluechanged",
-              dataHandler
-            );
-            setAccDataCharacteristic(prevChar => ({
-              ...prevChar,
-              isNotifying: false
-            }));
-          })
-          .catch(error => {
-            console.log(error);
-          });
+      if (!characteristic) {
+        return;
+      }
+      try {
+        await characteristic.stopNotifications();
+        characteristic.removeEventListener(
+          "characteristicvaluechanged",
+          dataHandler
+        );
+
+        setAccDataCharacteristic(prevChar => ({
+          ...prevChar,
+          isNotifying: false
+        }));
+      } catch (error) {
+        console.log(error);
       }
     };
 
-    const startNotifications = () => {
+    const startNotifications = async () => {
       const characteristic = accDataCharacteristic.characteristic;
-      characteristic
-        .startNotifications()
-        .then(() => {
-          characteristic.addEventListener(
-            "characteristicvaluechanged",
-            dataHandler
-          );
-          setAccDataCharacteristic(prevChar => ({
-            ...prevChar,
-            isNotifying: true
-          }));
-        })
-        .catch(error => {
-          console.log(error);
-        });
+      if (!characteristic) {
+        return;
+      }
+      try {
+        await characteristic.startNotifications();
+        characteristic.addEventListener(
+          "characteristicvaluechanged",
+          dataHandler
+        );
+        setAccDataCharacteristic(prevChar => ({
+          ...prevChar,
+          isNotifying: true
+        }));
+      } catch (error) {
+        console.log(error);
+      }
     };
 
-    useMemo(() => {
-      service &&
-        service
-          .getCharacteristic(uuids.configCharUUID)
-          .then(configCharacteristic =>
-            configCharacteristic.writeValue(Uint8Array.of(1))
-          ) // enable acc sensor
-          .then(() =>
-            service
-              .getCharacteristic(uuids.dataCharUUID) // read acc sensor output
-              .then(dataCharacteristic =>
-                dataCharacteristic.startNotifications().then(() => {
-                  dataCharacteristic.addEventListener(
-                    "characteristicvaluechanged",
-                    dataHandler
-                  );
-                  setAccDataCharacteristic({
-                    characteristic: dataCharacteristic,
-                    isNotifying: true
-                  });
-                })
-              )
-              .catch(err => console.log(err.message))
-          )
-          .catch(err => console.log(err.message));
+    useMemo(async () => {
+      if (!service) {
+        return;
+      }
+
+      try {
+        const configCharacteristic = await service.getCharacteristic(
+          uuids.configCharUUID
+        );
+        await configCharacteristic.writeValue(Uint8Array.of(1)); // enable acc sensor
+
+        const dataCharacteristic = await service.getCharacteristic(
+          uuids.dataCharUUID
+        ); // read acc sensor output
+        await dataCharacteristic.startNotifications();
+        dataCharacteristic.addEventListener(
+          "characteristicvaluechanged",
+          dataHandler
+        );
+
+        setAccDataCharacteristic({
+          characteristic: dataCharacteristic,
+          isNotifying: true
+        });
+      } catch (error) {
+        console.log(error);
+      }
     }, [
       dataHandler,
       service,
