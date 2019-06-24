@@ -9,7 +9,7 @@ const ACC_UUIDS = {
 };
 
 const App = () => {
-  const [accService, setAccService] = useState(undefined);
+  const [accService, setAccService] = useState(null);
 
   const getService = serviceUUID =>
     navigator.bluetooth
@@ -23,13 +23,11 @@ const App = () => {
       .catch(err => console.log(err.message));
 
   return (
-    <AccUUIDsContext.Provider value={ACC_UUIDS}>
-      <div>
-        <button onClick={() => getService(ACC_UUIDS.serviceUUID)}>
-          Scan devices
-        </button>
-      </div>
-      <SensorDataHandler service={accService} />
+    <AccUUIDsContext.Provider value={{ uuids: ACC_UUIDS, service: accService }}>
+      <button onClick={() => getService(ACC_UUIDS.serviceUUID)}>
+        Scan devices
+      </button>
+      <SensorDataHandler />
     </AccUUIDsContext.Provider>
   );
 };

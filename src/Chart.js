@@ -1,32 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React from "react";
 import CanvasJSReact from "./canvasjs.react";
 const CanvasChart = CanvasJSReact.CanvasJSChart;
 
-export const Chart = ({ data }) => {
-  const chartRef = useRef(null);
-  const [dataPoints, setDataPoints] = useState([]);
-  const [dataIndex, setDataIndex] = useState(0);
-
-  const updateChart = value => {
-    const point = { x: dataIndex, y: value };
-
-    setDataPoints(prevDataPoints => {
-      const points = [...prevDataPoints, point];
-      if (points.length > 20) {
-        points.shift();
-      }
-      return points;
-    });
-    setDataIndex(prevDataIndex => prevDataIndex + 1);
-    chartRef.current.render();
-  };
-
-  useEffect(() => {
-    if (chartRef && chartRef.current) {
-      updateChart(data);
-    }
-  }, [data]);
-
+export const Chart = React.memo(({ data, firstIndex }) => {
   const options = {
     title: {
       text: "Accelerometer data"
@@ -34,12 +10,15 @@ export const Chart = ({ data }) => {
     data: [
       {
         type: "line",
-        dataPoints: dataPoints
+        dataPoints: data.map((value, index) => ({
+          x: firstIndex + index,
+          y: value
+        }))
       }
     ],
     axisX: {
       title: "ticks",
-      minimum: 0,
+      minimum: firstIndex,
       interval: 1
     },
     axisY: {
@@ -47,9 +26,10 @@ export const Chart = ({ data }) => {
       minimum: 0
     }
   };
+
   return (
-    <div style={{ margin: "32px" }}>
-      <CanvasChart ref={chartRef} options={options} />
+    <div style={{ maxWidth: "64em", margin: "auto" }}>
+      <CanvasChart options={options} />
     </div>
   );
-};
+});
