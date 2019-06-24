@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "1d13a5378b80da9959c8fa8d0e10180c",
+    "revision": "1c136de3f481e4803cac4afb6f1235f5",
     "url": "/web-bluetooth/index.html"
   },
   {
-    "revision": "ec5b72f89a473b3d88ea",
+    "revision": "3d6164d3e14ef0dc972e",
     "url": "/web-bluetooth/static/css/main.34de6062.chunk.css"
   },
   {
@@ -12,8 +12,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/web-bluetooth/static/js/2.0423afda.chunk.js"
   },
   {
-    "revision": "ec5b72f89a473b3d88ea",
-    "url": "/web-bluetooth/static/js/main.38609c60.chunk.js"
+    "revision": "3d6164d3e14ef0dc972e",
+    "url": "/web-bluetooth/static/js/main.e72719fa.chunk.js"
   },
   {
     "revision": "5eb197a9f69b18b2c2fe",
