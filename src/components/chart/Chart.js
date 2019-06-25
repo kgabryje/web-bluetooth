@@ -10,6 +10,7 @@ export const Chart = React.memo(({ data, firstIndex }) => {
     data: [
       {
         type: "line",
+        lineColor: "#FF0079",
         dataPoints: data.map((value, index) => ({
           x: firstIndex + index,
           y: value
@@ -21,15 +22,8 @@ export const Chart = React.memo(({ data, firstIndex }) => {
       minimum: firstIndex,
       interval: 1
     },
-    axisY: {
-      title: "g",
-      minimum: 0
-    }
+    backgroundColor: "#C5FCEE"
   };
 
-  return (
-    <div style={{ maxWidth: "64em", margin: "auto" }}>
-      <CanvasChart options={options} />
-    </div>
-  );
+  return <CanvasChart options={options} />;
 });

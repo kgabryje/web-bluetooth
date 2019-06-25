@@ -1,9 +1,12 @@
 import React, { useContext, useMemo } from "react";
-import { AccUUIDsContext } from "./App";
+import { SensorTagContext } from "../App";
+import { FilledButton } from "./Button";
+import { PoseContainer } from "./Appear";
+import { Flex } from "./Layout";
 
 export const BLEConfigHandler = React.memo(
   ({ characteristicState, dataHandler }) => {
-    const { uuids, service } = useContext(AccUUIDsContext);
+    const context = useContext(SensorTagContext);
     const {
       accDataCharacteristic,
       setAccDataCharacteristic
@@ -27,6 +30,7 @@ export const BLEConfigHandler = React.memo(
         }));
       } catch (error) {
         console.log(error);
+        context.setErrorMessage(error.message);
       }
     };
 
@@ -47,22 +51,23 @@ export const BLEConfigHandler = React.memo(
         }));
       } catch (error) {
         console.log(error);
+        context.setErrorMessage(error.message);
       }
     };
 
     useMemo(async () => {
-      if (!service) {
+      if (!context.service) {
         return;
       }
 
       try {
-        const configCharacteristic = await service.getCharacteristic(
-          uuids.configCharUUID
+        const configCharacteristic = await context.service.getCharacteristic(
+          context.uuids.configCharUUID
         );
         await configCharacteristic.writeValue(Uint8Array.of(1)); // enable acc sensor
 
-        const dataCharacteristic = await service.getCharacteristic(
-          uuids.dataCharUUID
+        const dataCharacteristic = await context.service.getCharacteristic(
+          context.uuids.dataCharUUID
         ); // read acc sensor output
         await dataCharacteristic.startNotifications();
         dataCharacteristic.addEventListener(
@@ -75,26 +80,32 @@ export const BLEConfigHandler = React.memo(
           isNotifying: true
         });
       } catch (error) {
-        console.log(error);
+        console.log(error.message);
       }
     }, [
       dataHandler,
-      service,
+      context.service,
       setAccDataCharacteristic,
-      uuids.configCharUUID,
-      uuids.dataCharUUID
+      context.uuids.configCharUUID,
+      context.uuids.dataCharUUID
     ]);
 
     return (
-      <React.Fragment>
-        {service &&
-          accDataCharacteristic.characteristic &&
-          (accDataCharacteristic.isNotifying ? (
-            <button onClick={stopNotifications}>Stop reading data</button>
-          ) : (
-            <button onClick={startNotifications}>Start reading data</button>
-          ))}
-      </React.Fragment>
+      <Flex justifyContent="center" mt="100px">
+        {context.service && accDataCharacteristic.characteristic && (
+          <PoseContainer>
+            {accDataCharacteristic.isNotifying ? (
+              <FilledButton onClick={stopNotifications}>
+                Stop reading data
+              </FilledButton>
+            ) : (
+              <FilledButton onClick={startNotifications}>
+                Start reading data
+              </FilledButton>
+            )}
+          </PoseContainer>
+        )}
+      </Flex>
     );
   }
 );

@@ -1,7 +1,8 @@
 import React, { useState, useCallback, useRef } from "react";
-import { calcAccFromSensorOutput } from "./helpers";
-import { Chart } from "./Chart";
+import { calcAccFromSensorOutput } from "../helpers";
+import { Chart } from "./chart/Chart";
 import { BLEConfigHandler } from "./BLEConfigHandler";
+import { Box } from "./Layout";
 
 export const SensorDataHandler = () => {
   const [accDataCharacteristic, setAccDataCharacteristic] = useState({
@@ -30,7 +31,7 @@ export const SensorDataHandler = () => {
   }, []);
 
   return (
-    <div>
+    <Box width="100%" maxHeight="100%">
       <Chart data={values} firstIndex={firstDataIndex.current} />
       <BLEConfigHandler
         characteristicState={{
@@ -39,6 +40,6 @@ export const SensorDataHandler = () => {
         }}
         dataHandler={handleAccDataChange}
       />
-    </div>
+    </Box>
   );
 };

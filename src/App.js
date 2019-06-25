@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { SensorDataHandler } from "./SensorDataHandler";
+import { PoseGroup } from "react-pose";
+import { SensorDataHandler } from "./components/SensorDataHandler";
+import { FilledButton } from "./components/Button";
+import { Container } from "./components/Layout";
+import { PoseContainer } from "./components/Appear";
 
-export const AccUUIDsContext = React.createContext({
-  uuids: {
-    serviceUUID: "000000",
-    dataCharUUID: "000000",
-    configCharUUID: "000000"
-  },
-  service: null
+export const SensorTagContext = React.createContext({
+  uuids: {},
+  service: {},
+  setErrorMessage: () => {}
 });
 
 const ACC_UUIDS = {
@@ -18,6 +19,7 @@ const ACC_UUIDS = {
 
 const App = () => {
   const [accService, setAccService] = useState(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const getService = async serviceUUID => {
     try {
@@ -29,17 +31,44 @@ const App = () => {
 
       setAccService(service);
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
+      setErrorMessage(error.message);
     }
   };
 
+  const contextValue = {
+    uuids: ACC_UUIDS,
+    service: accService,
+    setErrorMessage: setErrorMessage
+  };
+
   return (
-    <AccUUIDsContext.Provider value={{ uuids: ACC_UUIDS, service: accService }}>
-      <button onClick={() => getService(ACC_UUIDS.serviceUUID)}>
-        Scan devices
-      </button>
-      <SensorDataHandler />
-    </AccUUIDsContext.Provider>
+    <SensorTagContext.Provider value={contextValue}>
+      <Container
+        position="absolute"
+        justifyContent="center"
+        alignItems="center"
+        top={0}
+        bottom={0}
+        left={0}
+        right={0}
+      >
+        <PoseGroup>
+          {accService ? (
+            <PoseContainer width="100%" key="chart">
+              <SensorDataHandler />
+            </PoseContainer>
+          ) : (
+            <PoseContainer key="search-button">
+              <FilledButton onClick={() => getService(ACC_UUIDS.serviceUUID)}>
+                Find SensorTag
+              </FilledButton>
+            </PoseContainer>
+          )}
+        </PoseGroup>
+        {errorMessage}
+      </Container>
+    </SensorTagContext.Provider>
   );
 };
 
