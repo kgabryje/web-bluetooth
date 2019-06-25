@@ -30,8 +30,8 @@ const App = () => {
       const service = await server.getPrimaryService(serviceUUID);
 
       setAccService(service);
+      setErrorMessage("");
     } catch (error) {
-      console.log(error.message);
       setErrorMessage(error.message);
     }
   };

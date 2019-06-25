@@ -28,13 +28,13 @@ export const BLEConfigHandler = React.memo(
           ...prevChar,
           isNotifying: false
         }));
+        context.setErrorMessage("");
       } catch (error) {
-        console.log(error);
         context.setErrorMessage(error.message);
       }
     };
 
-    const startNotifications = async () => {
+    const resumeNotifications = async () => {
       const characteristic = accDataCharacteristic.characteristic;
       if (!characteristic) {
         return;
@@ -49,8 +49,8 @@ export const BLEConfigHandler = React.memo(
           ...prevChar,
           isNotifying: true
         }));
+        context.setErrorMessage("");
       } catch (error) {
-        console.log(error);
         context.setErrorMessage(error.message);
       }
     };
@@ -79,16 +79,11 @@ export const BLEConfigHandler = React.memo(
           characteristic: dataCharacteristic,
           isNotifying: true
         });
+        context.setErrorMessage("");
       } catch (error) {
-        console.log(error.message);
+        context.setErrorMessage(error.message);
       }
-    }, [
-      dataHandler,
-      context.service,
-      setAccDataCharacteristic,
-      context.uuids.configCharUUID,
-      context.uuids.dataCharUUID
-    ]);
+    }, [context, dataHandler, setAccDataCharacteristic]);
 
     return (
       <Flex justifyContent="center" mt="100px">
@@ -99,7 +94,7 @@ export const BLEConfigHandler = React.memo(
                 Stop reading data
               </FilledButton>
             ) : (
-              <FilledButton onClick={startNotifications}>
+              <FilledButton onClick={resumeNotifications}>
                 Start reading data
               </FilledButton>
             )}
