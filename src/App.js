@@ -66,7 +66,7 @@ const App = () => {
             </PoseContainer>
           )}
         </PoseGroup>
-        {errorMessage}
+        <p style={{ color: "#ff2500" }}>{errorMessage}</p>
       </Container>
     </SensorTagContext.Provider>
   );

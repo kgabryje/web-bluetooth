@@ -22,6 +22,10 @@ export const Chart = React.memo(({ data, firstIndex }) => {
       minimum: firstIndex,
       interval: 1
     },
+    axisY: {
+      title: "9.81 m/s^2",
+      minimum: 0,
+    },
     backgroundColor: "#C5FCEE"
   };
 
