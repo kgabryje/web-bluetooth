@@ -6,7 +6,7 @@ const PoseContainer = lazy(() => import("./Appear"));
 
 export const BLEConfigHandler = React.memo(
   ({ characteristicState, dataHandler }) => {
-    const context = useContext(SensorTagContext);
+    const { uuids, service, setErrorMessage } = useContext(SensorTagContext);
     const {
       accDataCharacteristic,
       setAccDataCharacteristic
@@ -28,9 +28,9 @@ export const BLEConfigHandler = React.memo(
           ...prevChar,
           isNotifying: false
         }));
-        context.setErrorMessage("");
+        setErrorMessage("");
       } catch (error) {
-        context.setErrorMessage(error.message);
+        setErrorMessage(error.message);
       }
     };
 
@@ -49,25 +49,25 @@ export const BLEConfigHandler = React.memo(
           ...prevChar,
           isNotifying: true
         }));
-        context.setErrorMessage("");
+        setErrorMessage("");
       } catch (error) {
-        context.setErrorMessage(error.message);
+        setErrorMessage(error.message);
       }
     };
 
     useMemo(async () => {
-      if (!context.service) {
+      if (!service) {
         return;
       }
 
       try {
-        const configCharacteristic = await context.service.getCharacteristic(
-          context.uuids.configCharUUID
+        const configCharacteristic = await service.getCharacteristic(
+          uuids.configCharUUID
         );
         await configCharacteristic.writeValue(Uint8Array.of(1)); // enable acc sensor
 
-        const dataCharacteristic = await context.service.getCharacteristic(
-          context.uuids.dataCharUUID
+        const dataCharacteristic = await service.getCharacteristic(
+          uuids.dataCharUUID
         ); // read acc sensor output
         await dataCharacteristic.startNotifications();
         dataCharacteristic.addEventListener(
@@ -79,15 +79,22 @@ export const BLEConfigHandler = React.memo(
           characteristic: dataCharacteristic,
           isNotifying: true
         });
-        context.setErrorMessage("");
+        setErrorMessage("");
       } catch (error) {
-        context.setErrorMessage(error.message);
+        console.log("dupa " + error.message);
+        setErrorMessage(error.message);
       }
-    }, [context, dataHandler, setAccDataCharacteristic]);
+    }, [
+      service,
+      uuids,
+      dataHandler,
+      setAccDataCharacteristic,
+      setErrorMessage
+    ]);
 
     return (
       <Flex justifyContent="center" mt="100px">
-        {context.service && accDataCharacteristic.characteristic && (
+        {service && accDataCharacteristic.characteristic && (
           <PoseContainer>
             {accDataCharacteristic.isNotifying ? (
               <FilledButton onClick={stopNotifications}>
