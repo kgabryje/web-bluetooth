@@ -4,6 +4,7 @@ import { SensorDataHandler } from "./components/SensorDataHandler";
 import { FilledButton } from "./components/Button";
 import { Container } from "./components/Layout";
 import { Appear } from "./components/Appear";
+import { Spinner } from "./components/Spinner";
 
 export const SensorTagContext = React.createContext({
   uuids: {},
@@ -20,6 +21,7 @@ const ACC_UUIDS = {
 const App = () => {
   const [accService, setAccService] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
+  const [showSpinner, setShowSpinner] = useState(false);
 
   const getService = async () => {
     try {
@@ -27,13 +29,18 @@ const App = () => {
         filters: [{ name: "SensorTag" }],
         optionalServices: [ACC_UUIDS.serviceUUID]
       });
+
+      setShowSpinner(true);
+      setErrorMessage("");
+
       const server = await device.gatt.connect();
       const service = await server.getPrimaryService(ACC_UUIDS.serviceUUID);
 
       setAccService(service);
-      setErrorMessage("");
+      setShowSpinner(false);
     } catch (error) {
       setErrorMessage(error.message);
+      setShowSpinner(false);
     }
   };
 
@@ -61,7 +68,11 @@ const App = () => {
             </Appear>
           ) : (
             <Appear key="search-button">
-              <FilledButton onClick={getService}>Find SensorTag</FilledButton>
+              {showSpinner ? (
+                <Spinner />
+              ) : (
+                <FilledButton onClick={getService}>Find SensorTag</FilledButton>
+              )}
             </Appear>
           )}
         </PoseGroup>

@@ -81,7 +81,6 @@ export const BLEConfigHandler = React.memo(
         });
         setErrorMessage("");
       } catch (error) {
-        console.log("dupa " + error.message);
         setErrorMessage(error.message);
       }
     }, [
