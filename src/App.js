@@ -21,13 +21,14 @@ const App = () => {
   const [accService, setAccService] = useState(null);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const getService = async serviceUUID => {
+  const getService = async () => {
     try {
       const device = await navigator.bluetooth.requestDevice({
-        filters: [{ services: [serviceUUID] }]
+        filters: [{ name: "SensorTag" }],
+        optionalServices: [ACC_UUIDS.serviceUUID]
       });
       const server = await device.gatt.connect();
-      const service = await server.getPrimaryService(serviceUUID);
+      const service = await server.getPrimaryService(ACC_UUIDS.serviceUUID);
 
       setAccService(service);
       setErrorMessage("");
@@ -61,7 +62,7 @@ const App = () => {
               </PoseContainer>
             ) : (
               <PoseContainer key="search-button">
-                <FilledButton onClick={() => getService(ACC_UUIDS.serviceUUID)}>
+                <FilledButton onClick={getService}>
                   Find SensorTag
                 </FilledButton>
               </PoseContainer>
