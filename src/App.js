@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { PoseGroup } from "react-pose";
 import { SensorDataHandler } from "./components/SensorDataHandler";
 import { FilledButton } from "./components/Button";
 import { Container } from "./components/Layout";
-import { PoseContainer } from "./components/Appear";
+const PoseContainer = lazy(() => import("./components/Appear"));
 
 export const SensorTagContext = React.createContext({
   uuids: {},
@@ -43,32 +43,34 @@ const App = () => {
   };
 
   return (
-    <SensorTagContext.Provider value={contextValue}>
-      <Container
-        position="absolute"
-        justifyContent="center"
-        alignItems="center"
-        top={0}
-        bottom={0}
-        left={0}
-        right={0}
-      >
-        <PoseGroup>
-          {accService ? (
-            <PoseContainer width="100%" key="chart">
-              <SensorDataHandler />
-            </PoseContainer>
-          ) : (
-            <PoseContainer key="search-button">
-              <FilledButton onClick={() => getService(ACC_UUIDS.serviceUUID)}>
-                Find SensorTag
-              </FilledButton>
-            </PoseContainer>
-          )}
-        </PoseGroup>
-        <p style={{ color: "#ff2500" }}>{errorMessage}</p>
-      </Container>
-    </SensorTagContext.Provider>
+    <Suspense fallback={<div />}>
+      <SensorTagContext.Provider value={contextValue}>
+        <Container
+          position="absolute"
+          justifyContent="center"
+          alignItems="center"
+          top={0}
+          bottom={0}
+          left={0}
+          right={0}
+        >
+          <PoseGroup>
+            {accService ? (
+              <PoseContainer width="100%" key="chart">
+                <SensorDataHandler />
+              </PoseContainer>
+            ) : (
+              <PoseContainer key="search-button">
+                <FilledButton onClick={() => getService(ACC_UUIDS.serviceUUID)}>
+                  Find SensorTag
+                </FilledButton>
+              </PoseContainer>
+            )}
+          </PoseGroup>
+          <p style={{ color: "#ff2500" }}>{errorMessage}</p>
+        </Container>
+      </SensorTagContext.Provider>
+    </Suspense>
   );
 };
 

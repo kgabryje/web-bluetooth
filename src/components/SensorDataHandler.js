@@ -1,8 +1,8 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useState, useCallback, useRef, lazy } from "react";
 import { calcAccFromSensorOutput } from "../helpers";
-import { Chart } from "./chart/Chart";
 import { BLEConfigHandler } from "./BLEConfigHandler";
 import { Box } from "./Layout";
+const Chart = lazy(() => import("./chart/Chart"));
 
 export const SensorDataHandler = () => {
   const [accDataCharacteristic, setAccDataCharacteristic] = useState({

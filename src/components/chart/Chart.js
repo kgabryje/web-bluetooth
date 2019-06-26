@@ -2,7 +2,7 @@ import React from "react";
 import CanvasJSReact from "./canvasjs.react";
 const CanvasChart = CanvasJSReact.CanvasJSChart;
 
-export const Chart = React.memo(({ data, firstIndex }) => {
+export default React.memo(({ data, firstIndex }) => {
   const options = {
     title: {
       text: "Accelerometer data"

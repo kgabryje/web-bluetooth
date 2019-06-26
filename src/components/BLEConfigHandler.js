@@ -1,8 +1,8 @@
-import React, { useContext, useMemo } from "react";
+import React, { lazy, useContext, useMemo } from "react";
 import { SensorTagContext } from "../App";
 import { FilledButton } from "./Button";
-import { PoseContainer } from "./Appear";
 import { Flex } from "./Layout";
+const PoseContainer = lazy(() => import("./Appear"));
 
 export const BLEConfigHandler = React.memo(
   ({ characteristicState, dataHandler }) => {
