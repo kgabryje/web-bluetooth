@@ -1,18 +1,18 @@
 {
   "files": {
-    "static/js/0.d77bfdac.chunk.js": "/web-bluetooth/static/js/0.d77bfdac.chunk.js",
-    "static/js/0.d77bfdac.chunk.js.map": "/web-bluetooth/static/js/0.d77bfdac.chunk.js.map",
+    "static/js/0.d3255d2d.chunk.js": "/web-bluetooth/static/js/0.d3255d2d.chunk.js",
+    "static/js/0.d3255d2d.chunk.js.map": "/web-bluetooth/static/js/0.d3255d2d.chunk.js.map",
     "main.css": "/web-bluetooth/static/css/main.d0ee48e8.chunk.css",
     "main.js": "/web-bluetooth/static/js/main.e16870a1.chunk.js",
     "main.js.map": "/web-bluetooth/static/js/main.e16870a1.chunk.js.map",
-    "runtime~main.js": "/web-bluetooth/static/js/runtime~main.8f8fafff.js",
-    "runtime~main.js.map": "/web-bluetooth/static/js/runtime~main.8f8fafff.js.map",
+    "runtime~main.js": "/web-bluetooth/static/js/runtime~main.24d93373.js",
+    "runtime~main.js.map": "/web-bluetooth/static/js/runtime~main.24d93373.js.map",
     "static/js/3.42d17ea0.chunk.js": "/web-bluetooth/static/js/3.42d17ea0.chunk.js",
     "static/js/3.42d17ea0.chunk.js.map": "/web-bluetooth/static/js/3.42d17ea0.chunk.js.map",
     "static/js/4.a503f4f4.chunk.js": "/web-bluetooth/static/js/4.a503f4f4.chunk.js",
     "static/js/4.a503f4f4.chunk.js.map": "/web-bluetooth/static/js/4.a503f4f4.chunk.js.map",
     "index.html": "/web-bluetooth/index.html",
-    "precache-manifest.abe69098bd5af6a0e8f5c7b03a03483d.js": "/web-bluetooth/precache-manifest.abe69098bd5af6a0e8f5c7b03a03483d.js",
+    "precache-manifest.b74d32a4655f88709eab13430fc7cea5.js": "/web-bluetooth/precache-manifest.b74d32a4655f88709eab13430fc7cea5.js",
     "service-worker.js": "/web-bluetooth/service-worker.js",
     "static/css/main.d0ee48e8.chunk.css.map": "/web-bluetooth/static/css/main.d0ee48e8.chunk.css.map"
   }
