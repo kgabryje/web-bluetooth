@@ -1,18 +1,18 @@
 {
   "files": {
-    "static/js/0.66a0c448.chunk.js": "/web-bluetooth/static/js/0.66a0c448.chunk.js",
-    "static/js/0.66a0c448.chunk.js.map": "/web-bluetooth/static/js/0.66a0c448.chunk.js.map",
+    "static/js/0.d77bfdac.chunk.js": "/web-bluetooth/static/js/0.d77bfdac.chunk.js",
+    "static/js/0.d77bfdac.chunk.js.map": "/web-bluetooth/static/js/0.d77bfdac.chunk.js.map",
     "main.css": "/web-bluetooth/static/css/main.d0ee48e8.chunk.css",
-    "main.js": "/web-bluetooth/static/js/main.cda3f2d1.chunk.js",
-    "main.js.map": "/web-bluetooth/static/js/main.cda3f2d1.chunk.js.map",
-    "runtime~main.js": "/web-bluetooth/static/js/runtime~main.fae07a06.js",
-    "runtime~main.js.map": "/web-bluetooth/static/js/runtime~main.fae07a06.js.map",
-    "static/js/3.0e897436.chunk.js": "/web-bluetooth/static/js/3.0e897436.chunk.js",
-    "static/js/3.0e897436.chunk.js.map": "/web-bluetooth/static/js/3.0e897436.chunk.js.map",
+    "main.js": "/web-bluetooth/static/js/main.e16870a1.chunk.js",
+    "main.js.map": "/web-bluetooth/static/js/main.e16870a1.chunk.js.map",
+    "runtime~main.js": "/web-bluetooth/static/js/runtime~main.8f8fafff.js",
+    "runtime~main.js.map": "/web-bluetooth/static/js/runtime~main.8f8fafff.js.map",
+    "static/js/3.42d17ea0.chunk.js": "/web-bluetooth/static/js/3.42d17ea0.chunk.js",
+    "static/js/3.42d17ea0.chunk.js.map": "/web-bluetooth/static/js/3.42d17ea0.chunk.js.map",
     "static/js/4.a503f4f4.chunk.js": "/web-bluetooth/static/js/4.a503f4f4.chunk.js",
     "static/js/4.a503f4f4.chunk.js.map": "/web-bluetooth/static/js/4.a503f4f4.chunk.js.map",
     "index.html": "/web-bluetooth/index.html",
-    "precache-manifest.3358452f9c652a95b0c3bb15d526d0ed.js": "/web-bluetooth/precache-manifest.3358452f9c652a95b0c3bb15d526d0ed.js",
+    "precache-manifest.abe69098bd5af6a0e8f5c7b03a03483d.js": "/web-bluetooth/precache-manifest.abe69098bd5af6a0e8f5c7b03a03483d.js",
     "service-worker.js": "/web-bluetooth/service-worker.js",
     "static/css/main.d0ee48e8.chunk.css.map": "/web-bluetooth/static/css/main.d0ee48e8.chunk.css.map"
   }
