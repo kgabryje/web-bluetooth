@@ -1,7 +1,7 @@
 import posed from "react-pose";
 import { Flex } from "./Layout";
 
-export default posed(Flex)({
+export const Appear = posed(Flex)({
   enter: {
     opacity: 1,
     y: 0,

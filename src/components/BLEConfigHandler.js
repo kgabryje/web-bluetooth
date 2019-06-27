@@ -1,8 +1,8 @@
-import React, { lazy, useContext, useMemo } from "react";
+import React, { useContext, useMemo } from "react";
 import { SensorTagContext } from "../App";
 import { FilledButton } from "./Button";
 import { Flex } from "./Layout";
-const PoseContainer = lazy(() => import("./Appear"));
+import { Appear } from "./Appear";
 
 export const BLEConfigHandler = React.memo(
   ({ characteristicState, dataHandler }) => {
@@ -95,7 +95,7 @@ export const BLEConfigHandler = React.memo(
     return (
       <Flex justifyContent="center" mt="100px">
         {service && accDataCharacteristic.characteristic && (
-          <PoseContainer>
+          <Appear>
             {accDataCharacteristic.isNotifying ? (
               <FilledButton onClick={stopNotifications}>
                 Stop reading data
@@ -105,7 +105,7 @@ export const BLEConfigHandler = React.memo(
                 Start reading data
               </FilledButton>
             )}
-          </PoseContainer>
+          </Appear>
         )}
       </Flex>
     );
