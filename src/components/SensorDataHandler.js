@@ -5,10 +5,6 @@ import { Box } from "./Layout";
 import { Chart } from "./chart/Chart";
 
 export const SensorDataHandler = () => {
-  const [accDataCharacteristic, setAccDataCharacteristic] = useState({
-    characteristic: null,
-    isNotifying: false
-  });
   const [values, setValues] = useState([]);
   const firstDataIndex = useRef(0);
 
@@ -34,10 +30,6 @@ export const SensorDataHandler = () => {
     <Box width="100%" maxHeight="100%">
       <Chart data={values} firstIndex={firstDataIndex.current} />
       <BLEConfigHandler
-        characteristicState={{
-          accDataCharacteristic,
-          setAccDataCharacteristic
-        }}
         dataHandler={handleAccDataChange}
       />
     </Box>
