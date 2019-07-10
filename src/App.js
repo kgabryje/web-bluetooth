@@ -25,13 +25,13 @@ const App = () => {
 
   const getService = async () => {
     try {
+      setShowSpinner(true);
+      setErrorMessage("");
+
       const device = await navigator.bluetooth.requestDevice({
         filters: [{ name: "SensorTag" }],
         optionalServices: [ACC_UUIDS.serviceUUID]
       });
-
-      setShowSpinner(true);
-      setErrorMessage("");
 
       const server = await device.gatt.connect();
       const service = await server.getPrimaryService(ACC_UUIDS.serviceUUID);
@@ -40,7 +40,7 @@ const App = () => {
     } catch (error) {
       setErrorMessage(error.message);
     } finally {
-      setShowSpinner(false)
+      setShowSpinner(false);
     }
   };
 
@@ -69,11 +69,9 @@ const App = () => {
             </Appear>
           ) : (
             <Appear key="search-button">
-              {showSpinner ? (
-                <Spinner />
-              ) : (
-                <FilledButton onClick={getService}>Find SensorTag</FilledButton>
-              )}
+              <FilledButton onClick={getService}>
+                {showSpinner ? <Spinner /> : "Find SensorTag"}
+              </FilledButton>
             </Appear>
           )}
         </PoseGroup>

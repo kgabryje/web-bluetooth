@@ -35,14 +35,14 @@ const round = keyframes`
 `;
 
 export const Spinner = styled.div`
-  color: #2924fb;
-  font-size: 90px;
+  color: white;
+  font-size: 14px;
   text-indent: -9999em;
   overflow: hidden;
   width: 1em;
   height: 1em;
   border-radius: 50%;
-  margin: 72px auto;
+  margin: 2px auto;
   position: relative;
   transform: translateZ(0);
   animation: ${spinnerAnimation} 1.7s infinite ease, ${round} 1.7s infinite ease;
