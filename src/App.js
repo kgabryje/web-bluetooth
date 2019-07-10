@@ -37,10 +37,10 @@ const App = () => {
       const service = await server.getPrimaryService(ACC_UUIDS.serviceUUID);
 
       setAccService(service);
-      setShowSpinner(false);
     } catch (error) {
       setErrorMessage(error.message);
-      setShowSpinner(false);
+    } finally {
+      setShowSpinner(false)
     }
   };
 
@@ -53,6 +53,7 @@ const App = () => {
   return (
     <SensorTagContext.Provider value={contextValue}>
       <Container
+        id="ContentContainer"
         position="absolute"
         justifyContent="center"
         alignItems="center"
